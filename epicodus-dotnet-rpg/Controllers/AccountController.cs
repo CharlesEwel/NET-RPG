@@ -35,6 +35,7 @@ namespace epicodus_dotnet_rpg.Controllers
         {
             var user = new ApplicationUser { UserName = model.Email };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            await this._userManager.AddToRoleAsync(user, "BasicUser");
             if (result.Succeeded)
             {
                 return RedirectToAction("Index");
