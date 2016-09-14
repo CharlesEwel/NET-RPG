@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Role</h2>
+@Html.ActionLink("List Roles", "Index") | @Html.ActionLink("Manage User Role", "ManageUserRoles")
+<hr />
+@model epicodus_dotnet_rpg.ViewModels.RoleViewModel
+@using (Html.BeginForm("Create", "Roles", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<div>
+    Role name
+</div>
+<p>
+    @Html.TextBoxFor(m => m.RoleName)
+</p>
+<input type="submit" value="Save" />
+}
