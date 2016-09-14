@@ -78,9 +78,18 @@ namespace epicodus_dotnet_rpg.Controllers
 
         public async Task<IActionResult> Detail(string id)
         {
-            ViewBag.Roles = new SelectList(_db.Roles.ToList(), "Id", "Name");
+            ViewBag.Roles = _db.Roles.ToList();
             var currentUser = await _userManager.FindByIdAsync(id);
-            return View(currentUser);
+            ViewBag.UserId = id;
+            ViewBag.UserName = currentUser.UserName;
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> Detail(ManageUserRolesViewModel model)
+        {
+            var currentUser = await _userManager.FindByIdAsync(model.UserId);
+            await this._userManager.AddToRoleAsync(currentUser, model.RoleName);
+            return RedirectToAction("UserList");
         }
     }
 }

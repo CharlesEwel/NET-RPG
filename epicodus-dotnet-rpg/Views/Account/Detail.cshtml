@@ -1,14 +1,19 @@
-﻿@model epicodus_dotnet_rpg.Models.ApplicationUser
-
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using epicodus_dotnet_rpg.ViewModels;
+@model ManageUserRolesViewModel
 
-@Html.DisplayFor(m => m.UserName);
-
-@Html.DropDownList("Roles")
+@using (Html.BeginForm())
+{
+    <input type="hidden" id="UserId" name="UserId" value="@ViewBag.UserId"/>
+    @ViewBag.UserName
+    <select id="RoleName" name="RoleName">
+        @foreach(var role in ViewBag.Roles)
+        {
+            <option value=@role.Name>@role.Name</option>
+        }
+    </select>
+    <button type="submit">Submit</button>
+}
