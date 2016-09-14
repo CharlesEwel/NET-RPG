@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using epicodus_dotnet_rpg.ViewModels;
 using epicodus_dotnet_rpg.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace epicodus_dotnet_rpg.Controllers
 {
@@ -68,6 +69,18 @@ namespace epicodus_dotnet_rpg.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index");
+        }
+
+        public IActionResult UserList()
+        {
+            return View(_db.Users.ToList());
+        }
+
+        public async Task<IActionResult> Detail(string id)
+        {
+            ViewBag.Roles = new SelectList(_db.Roles.ToList(), "Id", "Name");
+            var currentUser = await _userManager.FindByIdAsync(id);
+            return View(currentUser);
         }
     }
 }

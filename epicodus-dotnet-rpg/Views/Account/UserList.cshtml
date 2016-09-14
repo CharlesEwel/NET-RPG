@@ -1,0 +1,16 @@
+﻿@using epicodus_dotnet_rpg.Models
+
+@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "Log In";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>List of Users</h1>
+<ul>
+    @foreach (var user in Model)
+    {
+        <li>@user.UserName   ----   @user.Id</li>
+        <li>@Html.ActionLink(user.UserName, "Detail", new { id = user.Id })</li> 
+    }
+</ul>
