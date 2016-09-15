@@ -24,9 +24,10 @@ namespace epicodus_dotnet_rpg.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            return View(currentUser);
         }
         public IActionResult Register()
         {
@@ -35,7 +36,7 @@ namespace epicodus_dotnet_rpg.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var user = new ApplicationUser { UserName = model.Email };
+            var user = new ApplicationUser { UserName = model.Email, Avatar= "http://www.historyforkids.net/images/medieval-peasant.jpg"};
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             await this._userManager.AddToRoleAsync(user, "BasicUser");
             if (result.Succeeded)
@@ -46,6 +47,13 @@ namespace epicodus_dotnet_rpg.Controllers
             {
                 return View();
             }
+        }
+        public async Task<IActionResult> EditAvatar(ApplicationUser user)
+        {
+            var currentUser = await _userManager.FindByIdAsync(user.Id);
+            currentUser.Avatar = user.Avatar;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
         public IActionResult Login()
         {

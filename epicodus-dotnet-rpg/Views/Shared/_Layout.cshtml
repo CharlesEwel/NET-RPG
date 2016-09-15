@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -9,10 +11,12 @@
 <body>
     <div class="topnav">
         <ul>
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
             <li>@Html.ActionLink("Account", "Index", "Account")</li>
             <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
             <li>@Html.ActionLink("User List", "UserList", "Account")</li>
         </ul>
+        <p>@User.Identity.Name</p>
     </div>
     <div class="main-container">
         <div class="main">

@@ -8,5 +8,6 @@ namespace epicodus_dotnet_rpg.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public string Avatar { get; set; }
     }
 }

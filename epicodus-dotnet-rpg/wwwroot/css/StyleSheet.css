@@ -6,6 +6,7 @@
     display: flex;
     background-color: black;
     color: white;
+    justify-content: space-between;
 }
 
 .topnav ul {
