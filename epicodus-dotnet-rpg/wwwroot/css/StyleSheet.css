@@ -1,0 +1,25 @@
+﻿body {
+    margin: 0;
+}
+
+.topnav {
+    display: flex;
+    background-color: black;
+    color: white;
+}
+
+.topnav ul {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+
+.topnav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 1em;
+}
+
+.topnav ul li a:hover {
+    color: darkgray;
+}
