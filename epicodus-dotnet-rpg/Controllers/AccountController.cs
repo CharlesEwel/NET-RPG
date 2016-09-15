@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using epicodus_dotnet_rpg.ViewModels;
 using epicodus_dotnet_rpg.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace epicodus_dotnet_rpg.Controllers
 {
@@ -75,7 +76,7 @@ namespace epicodus_dotnet_rpg.Controllers
         {
             return View(_db.Users.ToList());
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Detail(string id)
         {
             ViewBag.Roles = _db.Roles.ToList();
@@ -90,6 +91,10 @@ namespace epicodus_dotnet_rpg.Controllers
             var currentUser = await _userManager.FindByIdAsync(model.UserId);
             await this._userManager.AddToRoleAsync(currentUser, model.RoleName);
             return RedirectToAction("UserList");
+        }
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
