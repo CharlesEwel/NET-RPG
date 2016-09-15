@@ -23,3 +23,11 @@
 .topnav ul li a:hover {
     color: darkgray;
 }
+
+.main-container {
+    display: flex;
+}
+
+.main {
+    margin-left: 100px;
+}
